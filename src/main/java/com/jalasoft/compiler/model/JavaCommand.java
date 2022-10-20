@@ -4,14 +4,14 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 
-class JavaCommand {
+public class JavaCommand implements ICommandBuilder {
     private static final String JAVA_COMPILER = "javac ";
     private static final String JAVA_EXECUTE = "java ";
     private static final String JAVA_CP_PARAM = "-cp ";
     private static final String JAVA_AND = " && ";
     private static final String JAVA_SPACE = " ";
 
-    public String buildJavaCommand(String javaFolder, File javaFile) {
+    public String buildCommand(String javaFolder, File javaFile) {
         StringBuilder command = new StringBuilder();
         command.append(javaFolder)
                 .append(JAVA_COMPILER)
