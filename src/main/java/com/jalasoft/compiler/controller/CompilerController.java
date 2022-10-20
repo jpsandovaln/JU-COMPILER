@@ -32,20 +32,14 @@ public class CompilerController {
             String javaFolder = "D:\\JUProgra102\\java\\jdk1.8.0_251\\bin\\";
             String pythonFolder = "D:\\JUProgra102\\python\\python3\\bin\\";
 
-            String result = CompileFacade.compileCode(lang, javaFolder, javaFile);
-            /*String cmd  = "";
-            if (lang == "java") {
-                JavaCommand command = new JavaCommand();
-                cmd = command.buildJavaCommand(javaFolder, javaFile);
-
+            String folder = "";
+            if ("java".equals(lang)) {
+                folder = "D:\\JUProgra102\\java\\jdk1.8.0_251\\bin\\";
             }
-            if (lang == "python") {
-                PythonCommand command = new PythonCommand();
-                cmd = command.buildPythonCommand(pythonFolder, javaFile);
+            if ("python".equals(lang)) {
+                folder = "C:\\python39\\";
             }
-
-            Execute execute = new Execute();
-            String result = execute.run(cmd);*/
+            String result = CompileFacade.compileCode(lang, folder, javaFile);
             return result;
         } catch (IOException ex) {
             return ex.getMessage();
