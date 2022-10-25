@@ -1,11 +1,13 @@
 package com.jalasoft.compiler.model;
 
+import com.jalasoft.compiler.common.exceptions.ExecuteException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 class Execute {
-    public String run(String command){
+    public String run(String command) throws ExecuteException{
         ProcessBuilder builder = new ProcessBuilder("cmd", "/c", "\"" + command + "\"");
         builder.redirectErrorStream(true);
 
@@ -21,9 +23,9 @@ class Execute {
             }
             return result.toString();
         } catch (IOException ex) {
-            return ex.getMessage();
+            throw new ExecuteException(ex.getMessage());
         } catch (InterruptedException ex) {
-            return ex.getMessage();
+            throw new ExecuteException("Invalid command", ex);
         }
     }
 }

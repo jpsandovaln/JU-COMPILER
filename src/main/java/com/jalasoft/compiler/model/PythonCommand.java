@@ -1,16 +1,23 @@
 package com.jalasoft.compiler.model;
 
-import javax.print.DocFlavor;
-import java.io.File;
+import com.jalasoft.compiler.common.exceptions.CommandException;
+import com.jalasoft.compiler.model.parameters.PythonParameter;
 
-class PythonCommand implements ICommandBuilder {
+class PythonCommand implements ICommandBuilder<PythonParameter> {
     private static final String PYTHON_COMPILER = "python ";
 
-    public String buildCommand(String pythonFolder, File pythonFile) {
-        StringBuilder command = new StringBuilder();
-        command.append(pythonFolder)
-                .append(PYTHON_COMPILER)
-                .append(pythonFile.getAbsoluteFile());
-        return command.toString();
+    public String buildCommand(PythonParameter parameter) throws CommandException {
+        try {
+            StringBuilder command = new StringBuilder();
+            command.append(parameter.getPythonFolder())
+                    .append(PYTHON_COMPILER)
+                    .append(parameter.getFile().getAbsoluteFile());
+            if (command.toString().equals("")) {
+                throw new CommandException("Invalid parameter");
+            }
+            return command.toString();
+        } catch (Exception ex) {
+            throw new CommandException(ex);
+        }
     }
 }
