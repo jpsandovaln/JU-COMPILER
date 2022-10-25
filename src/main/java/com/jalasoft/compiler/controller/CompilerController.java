@@ -1,5 +1,7 @@
 package com.jalasoft.compiler.controller;
 
+import com.jalasoft.compiler.common.exceptions.CommandException;
+import com.jalasoft.compiler.common.exceptions.ExecuteException;
 import com.jalasoft.compiler.model.CompileFacade;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +44,10 @@ public class CompilerController {
             String result = CompileFacade.compileCode(lang, folder, javaFile);
             return result;
         } catch (IOException ex) {
+            return ex.getMessage();
+        } catch (ExecuteException ex) {
+            return ex.getMessage();
+        } catch (CommandException ex) {
             return ex.getMessage();
         }
     }
