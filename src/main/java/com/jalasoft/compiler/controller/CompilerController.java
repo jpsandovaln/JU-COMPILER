@@ -1,6 +1,7 @@
 package com.jalasoft.compiler.controller;
 
 import com.jalasoft.compiler.common.exceptions.CommandException;
+import com.jalasoft.compiler.common.exceptions.CompilerException;
 import com.jalasoft.compiler.common.exceptions.ExecuteException;
 import com.jalasoft.compiler.model.CompileFacade;
 
@@ -45,9 +46,8 @@ public class CompilerController {
             return result;
         } catch (IOException ex) {
             return ex.getMessage();
-        } catch (ExecuteException ex) {
-            return ex.getMessage();
-        } catch (CommandException ex) {
+        } catch (CompilerException ex) {
+            System.out.println(ex.getErrorCode());
             return ex.getMessage();
         }
     }
