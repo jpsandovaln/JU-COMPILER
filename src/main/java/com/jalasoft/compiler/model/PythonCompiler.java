@@ -13,6 +13,8 @@ public class PythonCompiler implements ICompiler {
     public String compiler(String folder, File file) throws CompilerException {
         try {
             ICommandBuilder<PythonParameter> command = new PythonCommand();
+            PythonParameter parameter = new PythonParameter(folder, file);
+            parameter.validate();
             String cmd = command.buildCommand(new PythonParameter(folder, file));
             Execute execute = new Execute();
             return execute.run(cmd);
