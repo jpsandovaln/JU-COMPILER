@@ -8,6 +8,7 @@ class PythonCommand implements ICommandBuilder<PythonParameter> {
 
     public String buildCommand(PythonParameter parameter) throws CommandException {
         try {
+            parameter.validate();
             StringBuilder command = new StringBuilder();
             command.append(parameter.getPythonFolder())
                     .append(PYTHON_COMPILER)
