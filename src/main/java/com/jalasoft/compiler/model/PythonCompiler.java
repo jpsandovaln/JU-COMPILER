@@ -3,6 +3,7 @@ package com.jalasoft.compiler.model;
 import com.jalasoft.compiler.common.exceptions.CommandException;
 import com.jalasoft.compiler.common.exceptions.CompilerException;
 import com.jalasoft.compiler.common.exceptions.ExecuteException;
+import com.jalasoft.compiler.common.exceptions.InvalidDataException;
 import com.jalasoft.compiler.model.parameters.PythonParameter;
 
 import java.io.File;
@@ -15,13 +16,15 @@ public class PythonCompiler implements ICompiler {
             ICommandBuilder<PythonParameter> command = new PythonCommand();
             PythonParameter parameter = new PythonParameter(folder, file);
             parameter.validate();
-            String cmd = command.buildCommand(new PythonParameter(folder, file));
+            String cmd = command.buildCommand(parameter);
             Execute execute = new Execute();
             return execute.run(cmd);
         } catch (CommandException ex) {
             throw new CompilerException(ex.getMessage(), ex, "404");
         } catch (ExecuteException ex) {
             throw new CompilerException(ex.getMessage(), "400");
+        } catch (InvalidDataException ex) {
+            throw new CompilerException(ex.getMessage(), "401");
         }
     }
 }

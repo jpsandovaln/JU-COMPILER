@@ -15,6 +15,7 @@ public class JavaCommand implements ICommandBuilder<JavaParameter> {
 
     public String buildCommand(JavaParameter parameter) throws CommandException {
         try {
+            parameter.validate();
             StringBuilder command = new StringBuilder();
             command.append(parameter.getJavaFolder())
                     .append(JAVA_COMPILER)
